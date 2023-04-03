@@ -3,12 +3,15 @@ import type { ReactNode } from "react";
 import { CodeProps } from "../code";
 
 type ASCII = string;
+type Range = [number, number];
 
 // Common interface to reduce duplication.
 interface BaseProps {
   header?: ReactNode;
   description?: ReactNode;
   language?: CodeProps["language"];
+  // Array of lines range to remove from snippet.
+  ignored?: Range[];
 }
 
 // Interface to the presentation component.
