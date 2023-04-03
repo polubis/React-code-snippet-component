@@ -1,27 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import type { DynamicSnippetProps } from "./models";
+import type { DynamicSnippetProps, DynamicSnippetState } from "./models";
 import { SnippetContent } from "./SnippetContent";
-import { trimASCIIArt } from "./ASCII";
-
-interface PendingState {
-  status: "pending";
-  ascii: string;
-}
-
-interface OkState {
-  status: "ok";
-  code: string;
-}
-
-interface FailState {
-  status: "fail";
-}
-
-// Union of types for better type-safety.
-type State = PendingState | OkState | FailState;
+import { generateASCIIArt } from "./ASCII";
 
 // Gets code for different statuses.
-const getCode = (state: State): string => {
+const getCode = (state: DynamicSnippetState): string => {
   if (state.status === "pending") return state.ascii;
 
   if (state.status === "fail") return "Failed";
@@ -38,11 +21,12 @@ const DynamicSnippet = ({
   linesCount,
   ascii
 }: DynamicSnippetProps) => {
-  const asciiArt = useMemo(() => trimASCIIArt(ascii, linesCount), [
+  // Generating ASCII art.
+  const asciiArt = useMemo(() => generateASCIIArt(ascii, linesCount), [
     linesCount,
     ascii
   ]);
-  const [state, setState] = useState<State>({
+  const [state, setState] = useState<DynamicSnippetState>({
     status: "pending",
     ascii: asciiArt
   });

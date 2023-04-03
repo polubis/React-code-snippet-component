@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Snippet } from "./snippet";
 import "./styles.css";
 
 export default function App() {
+  const [loadCounter, setLoadCounter] = useState(0);
+
   return (
     <div className="App">
       <h1>Dynamic code snippet</h1>
@@ -51,7 +54,12 @@ export default function App() {
       <h1>Toggle snippet</h1>
 
       <Snippet
-        header={<button>Some action</button>}
+        header={
+          <button onClick={() => setLoadCounter((prev) => prev + 1)}>
+            Refetch
+          </button>
+        }
+        key={"" + loadCounter}
         src="https://raw.githubusercontentWebBlog/main/.prettierignore"
         description="Some text for example"
         linesCount={4}

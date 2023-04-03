@@ -37,38 +37,49 @@ const ASCII_IMGS = {
 };
 
 // Prepares ASCII graphic.
-const trimASCIIArt = (ascii = ASCII_IMGS.CAT, linesCount = 15): string => {
+const generateASCIIArt = (ascii = ASCII_IMGS.CAT, linesCount = 15): string => {
+  // Split by enter.
   const asciiArr = ascii.split("\n");
-  const diff = asciiArr.length - linesCount;
+  const linesDifference = asciiArr.length - linesCount;
 
-  if (diff === 0) {
+  // Original ASCII returned when there is no difference.
+  if (linesDifference === 0) {
     return ascii;
   }
 
-  const absDiff = Math.abs(diff);
-  const placeholder = `⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤`;
+  const iterations = Math.abs(linesDifference);
 
-  if (diff > 0) {
-    for (let i = 0; i < absDiff; i++) {
+  const removeLines = () => {
+    for (let i = 0; i < iterations; i++) {
       if (i % 2 === 0) {
         asciiArr.pop();
       } else {
         asciiArr.shift();
       }
     }
-  }
+  };
 
-  if (diff < 0) {
-    for (let i = 0; i < absDiff; i++) {
+  const addLines = () => {
+    const placeholder = `⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤`;
+
+    for (let i = 0; i < iterations; i++) {
       if (i % 2 === 0) {
         asciiArr.push(placeholder);
       } else {
         asciiArr.unshift(placeholder);
       }
     }
+  };
+
+  if (linesDifference > 0) {
+    removeLines();
+  } else {
+    addLines();
   }
 
+  // Creating art again by converting array to string
+  // separated by new line.
   return asciiArr.join("\n");
 };
 
-export { trimASCIIArt };
+export { generateASCIIArt };

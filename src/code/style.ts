@@ -22,18 +22,6 @@ const Wrapper = styled.div`
     hyphens: none;
   }
 
-  /* code[class*="language-"] ::-moz-selection,
-  code[class*="language-"]::-moz-selection,
-  pre[class*="language-"] ::-moz-selection,
-  pre[class*="language-"]::-moz-selection {
-    text-shadow: none;
-  }
-  code[class*="language-"] ::selection,
-  code[class*="language-"]::selection,
-  pre[class*="language-"] ::selection,
-  pre[class*="language-"]::selection {
-    text-shadow: none;
-  } */
   @media print {
     code[class*="language-"],
     pre[class*="language-"] {
