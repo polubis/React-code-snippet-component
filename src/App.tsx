@@ -40,7 +40,7 @@ export default function App() {
 
       <div style={{ marginTop: "40px" }} />
 
-      <h1>When error</h1>
+      <h1>Dynamic when error</h1>
 
       <Snippet
         header={<button>Some action</button>}
@@ -62,7 +62,7 @@ export default function App() {
         key={"" + loadCounter}
         src="https://raw.githubusercontentWebBlog/main/.prettierignore"
         description="Some text for example"
-        linesCount={4}
+        linesCount={30}
       />
     </div>
   );

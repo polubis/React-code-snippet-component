@@ -1,15 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import type { DynamicSnippetProps, DynamicSnippetState } from "./models";
 import { SnippetContent } from "./SnippetContent";
-import { generateASCIIArt } from "./ASCII";
+import { ASCII_IMGS, generateASCIIArt } from "./ASCII";
 
 // Gets code for different statuses.
 const getCode = (state: DynamicSnippetState): string => {
-  if (state.status === "pending") return state.ascii;
-
-  if (state.status === "fail") return "Failed";
-
-  return state.code;
+  return state.status === "pending" || state.status === "fail"
+    ? state.ascii
+    : state.code;
 };
 
 // This component loads snippet via src parameter.
@@ -18,17 +16,15 @@ const DynamicSnippet = ({
   description,
   header,
   language,
-  linesCount,
-  ascii
+  linesCount
 }: DynamicSnippetProps) => {
   // Generating ASCII art.
-  const asciiArt = useMemo(() => generateASCIIArt(ascii, linesCount), [
-    linesCount,
-    ascii
+  const catASCII = useMemo(() => generateASCIIArt(ASCII_IMGS.CAT, linesCount), [
+    linesCount
   ]);
   const [state, setState] = useState<DynamicSnippetState>({
     status: "pending",
-    ascii: asciiArt
+    ascii: catASCII
   });
 
   const fetchCode = async (): Promise<void> => {
@@ -37,7 +33,7 @@ const DynamicSnippet = ({
       if (state.status !== "pending") {
         setState({
           status: "pending",
-          ascii: asciiArt
+          ascii: catASCII
         });
       }
 
@@ -45,7 +41,10 @@ const DynamicSnippet = ({
       const response = await fetch(src);
 
       if (!response.ok) {
-        setState({ status: "fail" });
+        setState({
+          status: "fail",
+          ascii: generateASCIIArt(ASCII_IMGS.SPIDER, linesCount)
+        });
         return;
       }
 
@@ -54,7 +53,10 @@ const DynamicSnippet = ({
 
       setState({ code, status: "ok" });
     } catch (err) {
-      setState({ status: "fail" });
+      setState({
+        status: "fail",
+        ascii: generateASCIIArt(ASCII_IMGS.SPIDER, linesCount)
+      });
     }
   };
 

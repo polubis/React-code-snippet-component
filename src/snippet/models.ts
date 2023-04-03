@@ -26,8 +26,6 @@ interface DynamicSnippetProps extends BaseProps {
   src: string;
   // Used to generate ASCII chart placeholders.
   linesCount?: number;
-  // Custom ASCII chart.
-  ascii?: string;
 }
 
 // Interface to the component wrapping component.
@@ -36,8 +34,6 @@ interface SnippetProps extends BaseProps {
   src?: string;
   // Used to generate ASCII chart placeholders.
   linesCount?: number;
-  // Custom ASCII chart.
-  ascii?: string;
 }
 
 // When snippets not loaded yet.
@@ -55,6 +51,7 @@ interface OkState {
 // When snippet load failed.
 interface FailState {
   status: "fail";
+  ascii: string;
 }
 
 // Union of types for better type-safety.
