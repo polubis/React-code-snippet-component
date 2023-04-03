@@ -1,69 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Snippet } from "./snippet";
+import type { SnippetProps } from "./snippet";
 import "./styles.css";
 
+const titles = ["Dynamic snippet", "Static snippet", "Error snippet"];
+
+const props: SnippetProps[] = [
+  {
+    src:
+      "https://raw.githubusercontent.com/polubis/React-code-snippet-component/main/src/code/setup.ts",
+    linesCount: 55
+  },
+  {
+    children: `import React from 'react'`
+  },
+  {
+    src:
+      "https://raw.githubusercontent.cReact-code-snippet-component/main/src/code/setup.ts",
+    linesCount: 55
+  }
+];
+
 export default function App() {
-  const [loadCounter, setLoadCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    const int = setInterval(() => {
+      setCounter((value) => {
+        const next = value + 1;
+        return next >= props.length ? 0 : next;
+      });
+    }, 3000);
+
+    return () => {
+      clearInterval(int);
+    };
+  }, []);
+
+  const title = titles[counter];
+  const currentProps = props[counter];
 
   return (
     <div className="App">
-      <h1>Dynamic code snippet</h1>
+      <h1>{title}</h1>
 
-      <Snippet
-        header={<button>Some action</button>}
-        src="https://raw.githubusercontent.com/polubis/WebBlog/main/.prettierignore"
-        description="Some text for example"
-        linesCount={4}
-      />
-
-      <div style={{ marginTop: "40px" }} />
-
-      <h1>Static code snippet</h1>
-      <Snippet
-        header={<button>Some action</button>}
-        description="Some text for example"
-      >
-        {`
-import { Snippet } from "./snippet";
-import "./styles.css";
-
-export default function App() {
-  return (
-    <div className="App">
-      <h1>Static code snippet</h1>
-      <Snippet>{import React from 'react'}</Snippet>
-    </div>
-  );
-}
-      `}
-      </Snippet>
-
-      <div style={{ marginTop: "40px" }} />
-
-      <h1>Dynamic when error</h1>
-
-      <Snippet
-        header={<button>Some action</button>}
-        src="https://raw.githubusercontentWebBlog/main/.prettierignore"
-        description="Some text for example"
-        linesCount={4}
-      />
-
-      <div style={{ marginTop: "40px" }} />
-
-      <h1>Toggle snippet</h1>
-
-      <Snippet
-        header={
-          <button onClick={() => setLoadCounter((prev) => prev + 1)}>
-            Refetch
-          </button>
-        }
-        key={"" + loadCounter}
-        src="https://raw.githubusercontentWebBlog/main/.prettierignore"
-        description="Some text for example"
-        linesCount={30}
-      />
+      <Snippet {...currentProps} />
     </div>
   );
 }
