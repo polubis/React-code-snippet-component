@@ -45,6 +45,17 @@ export default function App() {
         description="Some text for example"
         linesCount={4}
       />
+
+      <div style={{ marginTop: "40px" }} />
+
+      <h1>Toggle snippet</h1>
+
+      <Snippet
+        header={<button>Some action</button>}
+        src="https://raw.githubusercontentWebBlog/main/.prettierignore"
+        description="Some text for example"
+        linesCount={4}
+      />
     </div>
   );
 }
