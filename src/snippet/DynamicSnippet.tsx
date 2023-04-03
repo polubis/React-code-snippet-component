@@ -41,11 +41,7 @@ const DynamicSnippet = ({
       const response = await fetch(src);
 
       if (!response.ok) {
-        setState({
-          status: "fail",
-          ascii: generateASCIIArt(ASCII_IMGS.SPIDER, linesCount)
-        });
-        return;
+        throw Error("Something went wrong");
       }
 
       // Parsing to text.

@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import { CodeProps } from "../code";
 
+type ASCII = string;
+
 // Common interface to reduce duplication.
 interface BaseProps {
   header?: ReactNode;
@@ -39,7 +41,7 @@ interface SnippetProps extends BaseProps {
 // When snippets not loaded yet.
 interface PendingState {
   status: "pending";
-  ascii: string;
+  ascii: ASCII;
 }
 
 // When snippets is loaded.
@@ -51,7 +53,7 @@ interface OkState {
 // When snippet load failed.
 interface FailState {
   status: "fail";
-  ascii: string;
+  ascii: ASCII;
 }
 
 // Union of types for better type-safety.
@@ -62,5 +64,6 @@ export type {
   SnippetProps,
   DynamicSnippetProps,
   StaticSnippetProps,
-  DynamicSnippetState
+  DynamicSnippetState,
+  ASCII
 };
