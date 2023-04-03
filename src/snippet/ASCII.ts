@@ -68,13 +68,19 @@ const SPIDER = `
                             '
 `;
 
-const ASCII_IMGS: Record<string, ASCII> = {
+const ASCII_IMGS = {
   CAT,
   SPIDER
 };
 
+const defaultPlaceholder = `⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤`;
+
 // Prepares ASCII graphic.
-const generateASCIIArt = (ascii: ASCII, linesCount = 15): string => {
+const generateASCIIArt = (
+  ascii: ASCII,
+  linesCount = 15,
+  placeholder = defaultPlaceholder
+): string => {
   // Split by enter.
   const asciiArr = ascii.split("\n");
   const linesDifference = asciiArr.length - linesCount;
@@ -97,8 +103,6 @@ const generateASCIIArt = (ascii: ASCII, linesCount = 15): string => {
   };
 
   const addLines = () => {
-    const placeholder = `⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤`;
-
     for (let i = 0; i < iterations; i++) {
       if (i % 2 === 0) {
         asciiArr.push(placeholder);
