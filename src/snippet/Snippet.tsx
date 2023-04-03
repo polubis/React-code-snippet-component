@@ -2,6 +2,10 @@ import { DynamicSnippet } from "./DynamicSnippet";
 import { StaticSnippet } from "./StaticSnippet";
 import { SnippetProps } from "./models";
 
+// TODO: Add error handling for Axios - other ASCII chart
+// Add option to display changes via red bg and green
+// Add option to toggle content inside snippet and be able later to expand it.
+
 const Snippet = ({
   src,
   children,
