@@ -57,8 +57,16 @@ const DynamicSnippet = ({
         });
       }
 
-      // Fetching content and parsing it to string.
-      const code = await (await fetch(src)).text();
+      // Fetching content from url.
+      const response = await fetch(src);
+
+      if (!response.ok) {
+        setState({ status: "fail" });
+        return;
+      }
+
+      // Parsing to text.
+      const code = await response.text();
 
       setState({ code, status: "ok" });
     } catch (err) {
@@ -67,8 +75,9 @@ const DynamicSnippet = ({
   };
 
   useEffect(() => {
+    // Loading the code when src parameter change.
     fetchCode();
-  }, []);
+  }, [src]);
 
   const children = useMemo(() => getCode(state), [state]);
 
