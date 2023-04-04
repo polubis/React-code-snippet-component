@@ -18,7 +18,7 @@ const DynamicSnippet = ({
   language,
   linesCount
 }: DynamicSnippetProps) => {
-  // Generating ASCII art.
+  // Generates ASCII art.
   const catASCII = useMemo(() => generateASCIIArt(ASCII_IMGS.CAT, linesCount), [
     linesCount
   ]);
@@ -37,7 +37,7 @@ const DynamicSnippet = ({
         });
       }
 
-      // Fetching content from url.
+      // Loads content from url.
       const response = await fetch(src);
       console.log(response.ok);
 
@@ -45,7 +45,7 @@ const DynamicSnippet = ({
         throw Error("Something went wrong");
       }
 
-      // Parsing to text.
+      // Parses into text.
       const code = await response.text();
 
       setState({ code, status: "ok" });
@@ -58,7 +58,7 @@ const DynamicSnippet = ({
   };
 
   useEffect(() => {
-    // Loading the code when src parameter change.
+    // Loads the code when src parameter change.
     fetchCode();
   }, [src]);
 
