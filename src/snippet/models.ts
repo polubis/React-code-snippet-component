@@ -30,7 +30,7 @@ interface DynamicSnippetProps extends BaseProps {
   linesCount?: number;
 }
 
-// Interface to the component wrapping component.
+// Interface to the main component.
 interface SnippetProps extends BaseProps {
   children?: string;
   src?: string;
@@ -44,13 +44,13 @@ interface PendingState {
   ascii: ASCII;
 }
 
-// When snippets is loaded.
+// When snippets are loaded.
 interface OkState {
   status: "ok";
   code: string;
 }
 
-// When snippet load failed.
+// When snippets load failed.
 interface FailState {
   status: "fail";
   ascii: ASCII;
