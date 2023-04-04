@@ -10,7 +10,7 @@ const SnippetContent = ({
   return (
     // The class is added with the prefix ui to
     // reduce the risk of collisions with other
-    // classes, in the application.
+    // classes in the application.
     <Container className="ui-snippet-content">
       {header && (
         <Header className="ui-snippet-content-header">{header}</Header>
