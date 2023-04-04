@@ -39,6 +39,7 @@ const DynamicSnippet = ({
 
       // Fetching content from url.
       const response = await fetch(src);
+      console.log(response.ok);
 
       if (!response.ok) {
         throw Error("Something went wrong");
