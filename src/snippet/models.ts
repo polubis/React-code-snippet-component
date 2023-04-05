@@ -17,7 +17,7 @@ interface SnippetContentProps extends BaseProps {
 }
 
 // Interface to the component that will
-// show the code not from the link.
+// show the code from children.
 interface StaticSnippetProps extends BaseProps {
   children: string;
 }
@@ -38,7 +38,7 @@ interface SnippetProps extends BaseProps {
   linesCount?: number;
 }
 
-// When snippets not loaded yet.
+// When snippets haven't loaded yet.
 interface PendingState {
   status: "pending";
   ascii: ASCII;

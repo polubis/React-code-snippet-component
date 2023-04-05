@@ -81,7 +81,7 @@ const generateASCIIArt = (
   linesCount = 15,
   placeholder = defaultPlaceholder
 ): string => {
-  // Split by enter.
+  // Transforms string graphic to the array based on newline character.
   const asciiArr = ascii.split("\n");
   const linesDifference = asciiArr.length - linesCount;
 
@@ -118,8 +118,8 @@ const generateASCIIArt = (
     addLines();
   }
 
-  // Creating art again by converting array to string
-  // separated by new line.
+  // Creating art again by converting the array to
+  // string separated by newline character.
   return asciiArr.join("\n");
 };
 
